@@ -6,6 +6,15 @@ This repository accompanies the research note:
 Kirandeep Kaur, Independent Researcher (2026)  
 Contact: kiran@oxfordprioritymortgage.com
 
+## Manuscript
+
+**Scale-Resolved Correlation as a Control Variable in Emergent Connectivity**  
+Kirandeep Kaur, January 2026  
+
+PDF: Paper/scale_resolved_correlation_connectivity.pdf  
+
+Repository: https://github.com/Kaydeep0/scale-structure-tests
+
 ## Summary
 
 Recent work in holography and quantum information suggests that spacetime connectivity emerges from quantum entanglement. This note introduces a **scale-resolved correlation profile** defined via admissible coarse-graining flows, and proposes that operational connectivity depends on how correlation is distributed across scales, not only on the total amount. An exact theorem is proven in a layered tensor-network model, and numerical simulations demonstrate noise-robust separation of states with identical total mutual information but distinct scale profiles.
