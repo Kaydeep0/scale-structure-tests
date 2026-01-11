@@ -1,0 +1,221 @@
+\documentclass[11pt]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Scale-Resolved Correlation as a Control Variable in Emergent Connectivity}
+\author{Kirandeep Kaur \\ Independent Researcher}
+\date{January 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Recent work in holography and quantum information suggests that spacetime connectivity emerges from patterns of quantum entanglement. Existing formulations primarily relate global entanglement measures to geometric connectivity. We introduce a \emph{scale-resolved correlation profile} induced by an admissible coarse-graining flow and propose that operational connectivity depends on the \emph{distribution} of correlation across scales rather than on total correlation alone. We define an information-theoretic connectivity functional independent of geometric language, state a falsifiable conjecture relating connectivity to scale-resolved correlation, and and prove an exact theorem in a layered Bell-pair routing network demonstrating that connectivity varies with correlation distribution even at fixed total mutual information. Finally, we provide a minimal numerical illustration showing a noise-robust separation between two states with identical global mutual information but distinct scale profiles.
+\end{abstract}
+
+\section{Introduction}
+The ER=EPR conjecture posits that quantum entanglement (EPR) and spacetime connectivity (ER) are dual descriptions of an underlying relational structure \cite{maldacena_susskind_2013}. In holographic settings, geometric quantities are tied to entanglement diagnostics, including entanglement entropy and mutual information, and multiscale structure is explicit in tensor-network approaches \cite{swingle_2009}. However, global entanglement measures discard how correlation is distributed across hierarchical scales. This note isolates a simple claim: \emph{holding total correlation fixed does not fix operational connectivity, because connectivity can depend on \emph{where} correlation lives across scales}.
+
+\paragraph{What is new.}
+We introduce a scale-resolved correlation profile $\mathbf{E}$ defined from admissible coarse-graining flows, and propose $\mathbf{E}$ as a control variable for operational connectivity. We also isolate a minimal operational separation between states that share identical total mutual information.
+
+\paragraph{What is proven.}
+We prove an exact theorem in a layered tensor-network toy model: connectivity depends on the layer-wise allocation of correlation even when total correlation is held fixed.
+
+\paragraph{What remains conjectural.}
+The central conjecture is that, for physically relevant protocol families and admissible coarse-graining flows, operational connectivity $\mathcal{C}$ is better predicted by a weighted sum of scale components $\{E_k\}$ than by total mutual information alone.
+
+\paragraph{Related work.}
+Scale and hierarchy are explicit in tensor-network approaches to holography, including MERA-style constructions and the perspective that emergent geometry is encoded in multiscale entanglement structure \cite{swingle_2009,vidal_mera_2007}. Operational notions of connectivity are naturally expressed in bit-thread and entanglement-wedge reconstruction frameworks, where reconstructability depends on how purification resources and correlations distribute across subregions rather than on a single global scalar \cite{freedman_headrick_2016,almheiri_dong_harlow_2015}. Traversable-wormhole protocols and ``wormholes as quantum channels'' also provide an explicitly operational language for connectivity \cite{bao_channels_2018}. The present note is complementary: it proposes an information-theoretic scale profile $\mathbf{E}$ induced by an admissible coarse-graining flow, and isolates a minimal separation that persists at fixed total mutual information. A precise mapping between $\mathbf{E}$ and specific reconstruction depths, thread configurations, or code-subspace thresholds is left to future work.
+
+\section{Scale decomposition via admissible coarse-graining}
+Let $\mathcal{H}_L$ and $\mathcal{H}_R$ be Hilbert spaces for subsystems $L$ and $R$ with joint state $\rho_{LR}$.
+Consider a sequence of completely positive trace-preserving (CPTP) maps
+\[
+\Phi^{(k)}_L : \mathcal{D}(\mathcal{H}_L)\to \mathcal{D}(\mathcal{H}_{L,k}), \quad
+\Phi^{(k)}_R : \mathcal{D}(\mathcal{H}_R)\to \mathcal{D}(\mathcal{H}_{R,k}),
+\]
+for scales $k=0,1,\dots,K$, where larger $k$ corresponds to a coarser description. Define the reduced joint state at scale $k$:
+\[
+\rho^{(k)}_{L_k R_k} = (\Phi^{(k)}_L\otimes \Phi^{(k)}_R)(\rho_{LR}).
+\]
+We call the flow \emph{admissible} if mutual information is monotone under the flow,
+\[
+I(L_{k+1}:R_{k+1}) \le I(L_k:R_k),
+\]
+and the coarse descriptions are chosen to preserve cross-system predictive structure under dimensional reduction (in the sense relevant to the chosen protocol family).
+
+\section{Scale-resolved correlation profile}
+Define quantum mutual information
+\[
+I(A:B)_\sigma = S(\sigma_A)+S(\sigma_B)-S(\sigma_{AB}).
+\]
+Let
+\[
+I_k := I(L_k:R_k)_{\rho^{(k)}}.
+\]
+Define scale-resolved contributions
+\[
+E_k := I_k - I_{k+1}\quad (k=0,\dots,K-1),\qquad E_K := I_K.
+\]
+The vector $\mathbf{E}=(E_0,E_1,\dots,E_K)$ is the \emph{scale-resolved correlation profile}. By construction,
+\[
+I_0 = I(L:R) = \sum_{k=0}^K E_k.
+\]
+Two states can share identical $I(L:R)$ yet have different $\mathbf{E}$.
+
+\section{Operational connectivity functional}
+Let $\mathfrak{P}$ be a family of allowed interaction-and-decoding protocols. For $\mathcal{P}\in\mathfrak{P}$ define worst-case qubit transmission fidelity
+\[
+F(\rho_{LR};\mathcal{P})=\inf_{|\psi\rangle}\langle \psi|\rho^{\psi}_{\mathrm{out}}|\psi\rangle.
+\]
+Define operational connectivity
+\[
+\mathcal{C}(\rho_{LR})=\sup_{\mathcal{P}\in\mathfrak{P}}\Big(-\log\big(1-F(\rho_{LR};\mathcal{P})\big)\Big).
+\]
+This is an information-theoretic notion of effective connectivity that does not assume geometric language.
+
+\section{Conjecture: scale-controlled connectivity}
+For admissible coarse-graining flows and ER=EPR-compatible protocol families, there exist nonnegative weights $\{w_k\}$ such that
+\[
+\mathcal{C}(\rho_{LR}) \approx \sum_{k=0}^K w_k E_k,
+\]
+and this dependence is not reducible to $I(L:R)$ alone.
+
+\paragraph{Falsifiable form.}
+There exist states $\rho,\sigma$ such that
+\[
+I(L:R)_\rho = I(L:R)_\sigma
+\quad\text{but}\quad
+\mathbf{E}(\rho)\neq \mathbf{E}(\sigma),
+\]
+and consequently $\mathcal{C}(\rho)\neq \mathcal{C}(\sigma)$ for protocol families whose action is restricted to specific scale interfaces.
+
+\section{Exact theorem in a layered Bell-pair routing network}
+Consider a layered tensor network connecting $L$ and $R$ across layers $k=0,\dots,K$, each with Bell-pair routing capacity $c_k$. Let $E_k$ denote Bell-pair resources routed through layer $k$. Define network connectivity $\mathcal{C}_{TN}$ as the maximum number of qubits transmissible from $L$ to $R$.
+
+\paragraph{Theorem.}
+\[
+\mathcal{C}_{TN} = \sum_{k=0}^K \min(E_k,c_k).
+\]
+
+\paragraph{Corollary.}
+Fix $\sum_k E_k$. Then $\mathcal{C}_{TN}$ varies with the distribution $\{E_k\}$: redistributing correlation across layers changes connectivity at fixed total correlation.
+
+\section{Relation to holographic reconstruction}
+Holographic tensor-network models, entanglement-wedge reconstruction, and bit-thread formalisms all exhibit scale-layered structure: which degrees of freedom reconstruct which bulk regions depends on \emph{how} correlations and purification resources distribute across scales and subregions \cite{swingle_2009,freedman_headrick_2016,almheiri_dong_harlow_2015}. The scale-resolved profile $\mathbf{E}$ provides an explicit information-theoretic variable that can parameterize reconstruction thresholds in such models. Establishing a precise correspondence between $E_k$ and reconstruction depth, thread configurations, or code-subspace thresholds is left to future work.
+
+\section{Numerical illustration: noise-robust scale separation}
+We construct two four-qubit states (two qubits per side) as in Appendix~A and define a two-step coarse-graining where scale $k=1$ retains only the coarse qubits $(L_0:R_0)$ and discards $(L_1,R_1)$. We apply a single-qubit depolarizing channel independently to each qubit with strength $p$. We then compute:
+\[
+I_0(p)=I(L:R),\qquad I_1(p)=I(L_0:R_0),
+\]
+and the scale components (for this two-step flow)
+\[
+E_1(p)=I_1(p),\qquad E_0(p)=I_0(p)-I_1(p).
+\]
+By construction, $I_0(\rho)=I_0(\sigma)$ for all $p$ in this symmetric noise model, while $I_1(\rho)$ remains strictly larger than $I_1(\sigma)$ over a wide noise range, yielding a persistent separation in $\mathbf{E}$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.72\linewidth]{figure_total_mutual_information.png}
+\caption{Total mutual information $I_0(p)=I(L:R)$ under depolarizing noise for both constructions. The curves coincide across noise levels, confirming identical global correlation in this simulation.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.72\linewidth]{figure_coarse_mutual_information.png}
+\caption{Coarse-scale mutual information $I_1(p)=I(L_0:R_0)$. The aligned state $\rho$ exhibits a nontrivial coarse interface, while the cross-wired state $\sigma$ remains near zero at the coarse interface across noise strengths.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.72\linewidth]{figure_E1_component.png}
+\caption{Scale component $E_1(p)=I_1(p)$ for the two-step flow. This is the retained coarse-scale correlation. The separation matches Figure 2 by definition.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.72\linewidth]{figure_E0_component.png}
+\caption{Scale component $E_0(p)=I_0(p)-I_1(p)$. Since $I_0$ is identical for both states while $I_1$ differs, $E_0$ compensates so that $E_0+E_1=I_0$ holds for each construction.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.72\linewidth]{figure_log_negativity.png}
+\caption{Coarse-interface log-negativity on $(L_0,R_0)$ under noise. This coarse entanglement monotone distinguishes the constructions in the same sense as $I_1$: the aligned state retains coarse-interface entanglement while the cross-wired state does not.}
+\end{figure}
+
+\section{Conclusion}
+Global correlation measures alone do not fully characterize operational connectivity. A scale-resolved correlation profile $\mathbf{E}$ retains information about where correlation resides across hierarchical scales and can distinguish states with identical total mutual information. The layered tensor-network toy theorem proves that connectivity can vary at fixed total correlation when correlation is redistributed across layers. The numerical illustration shows that this separation persists under depolarizing noise.
+
+\section{Experimental program (testing the conjecture)}
+The conjecture admits direct tests in existing simulation frameworks:
+\begin{enumerate}
+\item Construct families of states (e.g.\ circuit states or MERA-like states) with equal $I(L:R)$ but different scale profiles $\mathbf{E}$ under a chosen admissible coarse-graining flow.
+\item Compute $\mathbf{E}$ numerically across noise or circuit depth.
+\item Choose an operational notion of connectivity (teleportation fidelity, channel capacity, decoding success) under protocol constraints that restrict action to specific scale interfaces.
+\item Measure $\mathcal{C}$ and test whether $\mathcal{C}$ tracks $\sum_k w_k E_k$ more accurately than it tracks $I(L:R)$ alone.
+\end{enumerate}
+This program requires no assumptions about full quantum gravity and can be executed on classical simulators for modest system sizes, with clear failure modes if the conjectured dependence does not hold.
+
+\appendix
+\section{Appendix A: Explicit two-qubit-per-side construction}
+Let each side have two qubits: $L=(L_0,L_1)$ and $R=(R_0,R_1)$.
+Let $|\Phi^+\rangle=(|00\rangle+|11\rangle)/\sqrt{2}$.
+
+Define the aligned state
+\[
+\rho = |\Phi^+\rangle\!\langle\Phi^+|_{L_0R_0}\otimes |\Phi^+\rangle\!\langle\Phi^+|_{L_1R_1},
+\]
+and the cross-wired state
+\[
+\sigma = |\Phi^+\rangle\!\langle\Phi^+|_{L_0R_1}\otimes |\Phi^+\rangle\!\langle\Phi^+|_{L_1R_0}.
+\]
+Both satisfy $I(L:R)=4$ at $p=0$. Under the coarse-graining that traces out $(L_1,R_1)$, $\rho$ retains a Bell pair on $(L_0,R_0)$ while $\sigma$ reduces to a product state on $(L_0,R_0)$, yielding distinct $I_1$ and distinct $\mathbf{E}$ at fixed $I_0$.
+
+\section{Appendix B: Simulation details}
+Simulations use NumPy density-matrix representations. Depolarizing noise is applied independently to each qubit. Mutual information and coarse-interface log-negativity are computed numerically across noise strengths. The code that generates all figures should be publicly linked here upon release:
+\[
+\texttt{<REPOSITORY\_URL\_TO\_BE\_INSERTED>}
+\]
+
+\begin{thebibliography}{9}
+
+\bibitem{maldacena_susskind_2013}
+J. Maldacena and L. Susskind,
+\textit{Cool horizons for entangled black holes},
+Fortschr. Phys. 61 (2013) 781--811, arXiv:1306.0533.
+
+\bibitem{swingle_2009}
+B. Swingle,
+\textit{Entanglement Renormalization and Holography},
+Phys. Rev. D 86, 065007 (2012), arXiv:0905.1317.
+
+\bibitem{vidal_mera_2007}
+G. Vidal,
+\textit{Entanglement Renormalization},
+Phys. Rev. Lett. 99, 220405 (2007), arXiv:cond-mat/0512165.
+
+\bibitem{freedman_headrick_2016}
+M. Freedman and M. Headrick,
+\textit{Bit threads and holographic entanglement},
+Commun. Math. Phys. 352 (2017) 407--438, arXiv:1604.00354.
+
+\bibitem{almheiri_dong_harlow_2015}
+A. Almheiri, X. Dong, and D. Harlow,
+\textit{Bulk Locality and Quantum Error Correction in AdS/CFT},
+JHEP 04 (2015) 163, arXiv:1411.7041.
+
+\bibitem{bao_channels_2018}
+N. Bao, A. Chatwin-Davies, J. Pollack, and G. N. Remmen,
+\textit{Traversable Wormholes as Quantum Channels: Exploring CFT Entanglement Structure and Channel Capacity in Holography},
+JHEP 11 (2018) 071, arXiv:1802.04008.
+
+\end{thebibliography}
+
+\end{document}
