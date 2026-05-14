@@ -44,4 +44,21 @@ Open `notebooks/scale_resolved_correlation_appendixA_noise_sweep.ipynb` and run 
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+This repository is **dual-licensed** for noncommercial use:
+
+| Content | License |
+|---------|---------|
+| Code (`.py`, scripts, notebooks) | [PolyForm Noncommercial 1.0.0](./LICENSE-CODE) |
+| Paper, figures, LaTeX, written content | [CC BY-NC-SA 4.0](./LICENSE-TEXT) |
+
+**Commercial use requires a separate license.** See
+[COMMERCIAL-LICENSING.md](./COMMERCIAL-LICENSING.md) for details and contact
+information.
+
+### Citation
+
+If you use this work, please cite:
+
+> Kaur, Kirandeep. "Scale-Resolved Correlation as a Control Variable in
+> Emergent Connectivity." 2026.
+> https://github.com/Kaydeep0/scale-structure-tests
